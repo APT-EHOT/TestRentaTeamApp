@@ -4,15 +4,15 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
+import io.reactivex.Flowable
 
 @Dao
 interface UserDao {
 
     @Query("SELECT * FROM user_table")
-    fun getTasks(searchQuery: String): Flow<List<User>>
+    fun getUsers(): Flowable<List<User>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(user: User)
+    fun insert(user: User)
 
 }
