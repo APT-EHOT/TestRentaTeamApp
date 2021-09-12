@@ -1,10 +1,10 @@
-package com.artemiymatchin.testrentateamapp.ui.dashboard
+package com.artemiymatchin.testrentateamapp.ui.userscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class UserScreenViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"

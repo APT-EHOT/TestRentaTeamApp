@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.artemiymatchin.testrentateamapp.ui.dashboard.DashboardFragment"
+        android:name="com.artemiymatchin.testrentateamapp.ui.userscreen.UserScreenFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.artemiymatchin.testrentateamapp.ui.notifications.NotificationsFragment"
+        android:name="com.artemiymatchin.testrentateamapp.ui.aboutscreen.AboutFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
