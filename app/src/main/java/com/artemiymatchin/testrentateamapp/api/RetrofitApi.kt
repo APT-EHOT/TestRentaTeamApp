@@ -10,7 +10,7 @@ interface RetrofitApi {
     }
 
     @GET("api/users")
-    suspend fun getUsers(
+    fun getUsers(
         @Query("page") page: Int
     ): RetrofitResponse
 }

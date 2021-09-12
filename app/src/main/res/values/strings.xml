@@ -3,4 +3,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+<!--  Home Fragment  -->
+    <string name="g">Notifications</string>
+    <string name="network_error">Network error! Tap "Offline mode" to load data from local cache</string>
+    <string name="no_data">No data in local cache</string>
+    <string name="offline_mode">Offline mode</string>
+
 </resources>
