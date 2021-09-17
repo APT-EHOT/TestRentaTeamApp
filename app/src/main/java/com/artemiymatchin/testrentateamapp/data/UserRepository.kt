@@ -14,7 +14,7 @@ class UserRepository @Inject constructor(
 
     fun getUsers(): Observable<List<User>> {
         refreshUser() // TODO: add no network handling
-        return userDao.getUsers()
+        return userDao.loadUsers()
     }
 
     private fun refreshUser() {
@@ -23,14 +23,13 @@ class UserRepository @Inject constructor(
         do {
             retrofitApi.getUsers(page)
                 .subscribeOn(Schedulers.io())
-            .doOnNext {
-                for (user in it.data) {
-                    userDao.insert(user)
+                .doOnNext {
+                    for (user in it.data) {
+                        userDao.insert(user)
+                    }
+                    maxPages = it.total_pages
                 }
-                maxPages = it.total_pages
-            }
-            .subscribe()
-
+                .subscribe()
             page++
         } while (page <= maxPages)
     }
