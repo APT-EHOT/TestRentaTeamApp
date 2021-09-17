@@ -10,7 +10,7 @@ import io.reactivex.Observable
 interface UserDao {
 
     @Query("SELECT * FROM user_table")
-    fun loadUsers(): Observable<List<User>>
+    fun loadUsersFromDB(): Observable<List<User>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(user: User)

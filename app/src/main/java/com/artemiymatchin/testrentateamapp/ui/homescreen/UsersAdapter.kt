@@ -1,4 +1,4 @@
-package com.artemiymatchin.testrentateamapp.ui.home
+package com.artemiymatchin.testrentateamapp.ui.homescreen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
