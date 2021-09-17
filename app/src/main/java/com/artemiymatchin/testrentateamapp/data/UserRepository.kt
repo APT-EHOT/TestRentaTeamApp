@@ -1,6 +1,7 @@
 package com.artemiymatchin.testrentateamapp.data
 
 import com.artemiymatchin.testrentateamapp.api.RetrofitApi
+import com.artemiymatchin.testrentateamapp.api.RetrofitResponse
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -18,19 +19,25 @@ class UserRepository @Inject constructor(
     }
 
     private fun refreshUser() {
-        var page = 1
-        var maxPages = 1
-        do {
-            retrofitApi.getUsers(page)
-                .subscribeOn(Schedulers.io())
-                .doOnNext {
-                    for (user in it.data) {
-                        userDao.insert(user)
-                    }
-                    maxPages = it.total_pages
+
+
+        // TODO: Look for other way to do this
+
+        retrofitApi.getUsersFromRemote(1)
+            .subscribeOn(Schedulers.io())
+            .doOnNext {
+                for (page in 1..it.total_pages) {
+
+                    retrofitApi.getUsersFromRemote(page)
+                        .subscribeOn(Schedulers.io())
+                        .doOnNext { response ->
+                            for (user in response.data) {
+                                userDao.insert(user)
+                            }
+                        }
+                        .subscribe()
                 }
-                .subscribe()
-            page++
-        } while (page <= maxPages)
+            }
+            .subscribe()
     }
 }
