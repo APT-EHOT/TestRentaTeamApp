@@ -33,8 +33,8 @@ object AppModule {
     @Singleton
     fun provideRetrofit(): Retrofit =
         Retrofit.Builder()
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .baseUrl(RetrofitApi.BASE_URL)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

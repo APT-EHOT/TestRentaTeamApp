@@ -1,7 +1,8 @@
 package com.artemiymatchin.testrentateamapp.data
 
 import com.artemiymatchin.testrentateamapp.api.RetrofitApi
-import io.reactivex.Flowable
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -11,18 +12,26 @@ class UserRepository @Inject constructor(
     private val userDao: UserDao
 ) {
 
-    fun getUsers(): Flowable<List<User>> {
+    fun getUsers(): Observable<List<User>> {
         refreshUser() // TODO: add no network handling
         return userDao.getUsers()
     }
 
     private fun refreshUser() {
         var page = 1
+        var maxPages = 1
         do {
-            val response = retrofitApi.getUsers(page)
-            for (user in response.data)
-                userDao.insert(user)
+            retrofitApi.getUsers(page)
+                .subscribeOn(Schedulers.io())
+            .doOnNext {
+                for (user in it.data) {
+                    userDao.insert(user)
+                }
+                maxPages = it.total_pages
+            }
+            .subscribe()
+
             page++
-        } while (page <= response.total_pages)
+        } while (page <= maxPages)
     }
 }

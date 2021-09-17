@@ -2,6 +2,7 @@ package com.artemiymatchin.testrentateamapp.api
 
 import retrofit2.http.GET
 import retrofit2.http.Query
+import io.reactivex.Observable
 
 interface RetrofitApi {
 
@@ -12,5 +13,5 @@ interface RetrofitApi {
     @GET("api/users")
     fun getUsers(
         @Query("page") page: Int
-    ): RetrofitResponse
+    ): Observable<RetrofitResponse>
 }
