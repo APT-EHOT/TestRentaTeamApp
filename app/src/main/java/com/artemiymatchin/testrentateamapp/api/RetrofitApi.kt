@@ -1,5 +1,6 @@
 package com.artemiymatchin.testrentateamapp.api
 
+import com.artemiymatchin.testrentateamapp.data.User
 import retrofit2.http.GET
 import retrofit2.http.Query
 import io.reactivex.Observable
@@ -14,4 +15,9 @@ interface RetrofitApi {
     fun getUsersFromRemote(
         @Query("page") page: Int
     ): Observable<RetrofitResponse>
+
+    @GET("api/users")
+    fun getUserById(
+        @Query("id") id: Int
+    ): Observable<User>
 }

@@ -1,13 +1,13 @@
 package com.artemiymatchin.testrentateamapp.ui.userscreen
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.artemiymatchin.testrentateamapp.data.UserRepository
 
-class UserScreenViewModel : ViewModel() {
+class UserScreenViewModel @ViewModelInject constructor(
+    val repository: UserRepository
+) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
-    }
-    val text: LiveData<String> = _text
 }
