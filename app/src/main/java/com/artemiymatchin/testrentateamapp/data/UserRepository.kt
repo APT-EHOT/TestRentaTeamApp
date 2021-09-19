@@ -24,7 +24,7 @@ class UserRepository @Inject constructor(
         because it works
 
         First query is for numbers of pages, other is for data
-         */
+        */
 
         retrofitApi.getUsersFromRemote(1)
             .subscribeOn(Schedulers.io())
@@ -39,10 +39,8 @@ class UserRepository @Inject constructor(
                             }
                         }
                         .subscribe({}, { e -> e.printStackTrace() })
-                        .dispose()
                 }
             }
             .subscribe({}, { e -> e.printStackTrace() })
-            .dispose()
     }
 }

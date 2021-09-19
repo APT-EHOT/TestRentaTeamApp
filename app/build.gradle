@@ -63,10 +63,11 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
 
-    // RxJava
+    // RxJava and RxAndroid
     implementation "io.reactivex.rxjava2:rxjava:2.2.21"
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
     implementation "androidx.room:room-rxjava2:2.3.0"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
     // Dagger Hilt
     implementation "com.google.dagger:hilt-android:2.28.3-alpha"
