@@ -6,26 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.artemiymatchin.testrentateamapp.R
+import com.artemiymatchin.testrentateamapp.data.FragmentDataState
+import com.artemiymatchin.testrentateamapp.databinding.FragmentUserScreenBinding
 
 class UserScreenFragment : Fragment() {
 
-    private lateinit var userScreenViewModel: UserScreenViewModel
+    private val userScreenViewModel: UserScreenViewModel by viewModels()
+    private lateinit var binding: FragmentUserScreenBinding
+    private lateinit var state: FragmentDataState
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        userScreenViewModel =
-                ViewModelProvider(this).get(UserScreenViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_about, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        userScreenViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding = FragmentUserScreenBinding.bind(view)
+
+        state = FragmentDataState.LOADING
     }
 }

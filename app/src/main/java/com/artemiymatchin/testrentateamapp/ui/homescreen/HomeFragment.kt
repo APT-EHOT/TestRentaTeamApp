@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.artemiymatchin.testrentateamapp.R
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.artemiymatchin.testrentateamapp.data.FragmentDataState
 import com.artemiymatchin.testrentateamapp.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,13 +18,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var state: HomeFragmentState
+    private lateinit var dataState: FragmentDataState
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
 
-        state = HomeFragmentState.LOADING
+        dataState = FragmentDataState.LOADING
 
         val usersAdapter = UsersAdapter()
 
@@ -41,10 +42,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             .subscribeOn(Schedulers.io())
             .doOnNext {
                 usersAdapter.submitList(it)
-                state = if (usersAdapter.itemCount == 0)
-                    HomeFragmentState.EMPTYCACHE
+                dataState = if (usersAdapter.itemCount == 0)
+                    FragmentDataState.EMPTYCACHE
                 else
-                    HomeFragmentState.SUCCESS
+                    FragmentDataState.SUCCESS
             }
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterNext {
@@ -55,18 +56,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun updateUI() {
         binding.apply {
-            when (state) {
-                HomeFragmentState.LOADING -> {
+            when (dataState) {
+                FragmentDataState.LOADING -> {
                     progressBar.isVisible = true
                     textViewEmpty.isVisible = false
                     recyclerView.isVisible = false
                 }
-                HomeFragmentState.EMPTYCACHE -> {
+                FragmentDataState.EMPTYCACHE -> {
                     progressBar.isVisible = false
                     textViewEmpty.isVisible = true
                     recyclerView.isVisible = false
                 }
-                HomeFragmentState.SUCCESS -> {
+                FragmentDataState.SUCCESS -> {
                     progressBar.isVisible = false
                     textViewEmpty.isVisible = false
                     recyclerView.isVisible = true
