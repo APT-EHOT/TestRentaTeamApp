@@ -15,9 +15,4 @@ interface RetrofitApi {
     fun getUsersFromRemote(
         @Query("page") page: Int
     ): Observable<RetrofitResponse>
-
-    @GET("api/users")
-    fun getUserByIdFromRemote(
-        @Query("id") id: Int
-    ): Observable<User>
 }

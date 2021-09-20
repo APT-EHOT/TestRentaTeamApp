@@ -45,20 +45,4 @@ class UserRepository @Inject constructor(
             }
             .subscribe({}, { e -> e.printStackTrace() })
     }
-
-
-    fun getUserByID(id: Int): Observable<User> {
-        tryToFetchUserByID(id)
-        return userDao.loadUserFromDB(id)
-    }
-
-
-    private fun tryToFetchUserByID(id: Int) {
-        retrofitApi.getUserByIdFromRemote(id)
-            .subscribeOn(Schedulers.io())
-            .doOnNext {
-                userDao.insert(it)
-            }
-            .subscribe({}, { e -> e.printStackTrace() })
-    }
 }

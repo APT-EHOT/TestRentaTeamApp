@@ -14,7 +14,4 @@ interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(user: User)
-
-    @Query("SELECT * FROM user_table WHERE id = :id")
-    fun loadUserFromDB(id: Int): Observable<User>
 }

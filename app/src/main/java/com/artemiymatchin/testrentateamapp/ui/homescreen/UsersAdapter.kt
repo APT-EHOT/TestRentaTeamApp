@@ -46,9 +46,6 @@ class UsersAdapter() :
         }
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(id: Int)
-    }
 
     class DiffCallback : DiffUtil.ItemCallback<User>() {
 

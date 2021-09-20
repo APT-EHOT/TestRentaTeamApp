@@ -21,8 +21,8 @@
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_user_screen" >
         <argument
-            android:name="id"
-            app:argType="integer" />
+            android:name="user"
+            app:argType="com.artemiymatchin.testrentateamapp.data.User" />
     </fragment>
 
     <fragment

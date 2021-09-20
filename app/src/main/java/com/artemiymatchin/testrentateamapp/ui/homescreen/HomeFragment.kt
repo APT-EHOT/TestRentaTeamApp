@@ -15,8 +15,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(R.layout.fragment_home),
-    UsersAdapter.OnItemClickListener {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
@@ -30,7 +29,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
         val usersAdapter = UsersAdapter()
         usersAdapter.onItemClick = {
-            val action = HomeFragmentDirections.actionHomeToUserInfo(it.id)
+            val action = HomeFragmentDirections.actionHomeToUserInfo(it)
             findNavController().navigate(action)
         }
 
@@ -80,9 +79,5 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 }
             }
         }
-    }
-
-    override fun onItemClick(id: Int) {
-
     }
 }
