@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -24,6 +25,7 @@ import com.bumptech.glide.request.target.Target
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_user_screen.*
 
 class UserScreenFragment : Fragment(R.layout.fragment_user_screen) {
 
@@ -45,7 +47,7 @@ class UserScreenFragment : Fragment(R.layout.fragment_user_screen) {
 
             Glide.with(this@UserScreenFragment)
                 .load(thisUser.avatar)
-                .error(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_round_image_not_supported_24)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
                         e: GlideException?,
@@ -53,7 +55,7 @@ class UserScreenFragment : Fragment(R.layout.fragment_user_screen) {
                         target: Target<Drawable>?,
                         isFirstResource: Boolean
                     ): Boolean {
-
+                        showUI()
                         return false
                     }
 
@@ -64,11 +66,21 @@ class UserScreenFragment : Fragment(R.layout.fragment_user_screen) {
                         dataSource: DataSource?,
                         isFirstResource: Boolean
                     ): Boolean {
-
+                        showUI()
                         return false
                     }
                 })
                 .into(userImage)
+        }
+    }
+
+    private fun showUI() {
+        binding.apply {
+            progressBar.isVisible = false
+            firstNameField.isVisible = true
+            secondNameField.isVisible = true
+            emailField.isVisible = true
+            userImage.isVisible = true
         }
     }
 }
