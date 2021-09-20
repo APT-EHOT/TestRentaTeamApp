@@ -13,6 +13,8 @@ import com.artemiymatchin.testrentateamapp.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -28,12 +30,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         dataState = FragmentDataState.LOADING
 
         val usersAdapter = UsersAdapter()
-        usersAdapter.onItemClick = {
-            val action = HomeFragmentDirections.actionHomeToUserInfo(it)
+
+        // Handling onItemClick for recyclerView Item
+        usersAdapter.onItemClick = { thisItemUser ->
+            val action = HomeFragmentDirections.actionHomeToUserInfo(thisItemUser)
             findNavController().navigate(action)
         }
-
-        updateUI()
 
         binding.apply {
             recyclerView.apply {
@@ -43,17 +45,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
 
+        updateUI()
+
         viewModel.users
             .subscribeOn(Schedulers.io())
             .doOnNext {
                 usersAdapter.submitList(it)
+            }
+            .delay(250, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doAfterNext {
                 dataState = if (usersAdapter.itemCount == 0)
                     FragmentDataState.EMPTYCACHE
                 else
                     FragmentDataState.SUCCESS
-            }
-            .observeOn(AndroidSchedulers.mainThread())
-            .doAfterNext {
                 updateUI()
             }
             .subscribe()

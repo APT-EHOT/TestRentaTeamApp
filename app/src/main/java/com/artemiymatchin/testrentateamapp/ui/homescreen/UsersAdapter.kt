@@ -1,9 +1,7 @@
 package com.artemiymatchin.testrentateamapp.ui.homescreen
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +9,7 @@ import com.artemiymatchin.testrentateamapp.data.User
 import com.artemiymatchin.testrentateamapp.databinding.UserShortCardBinding
 
 
-class UsersAdapter() :
+class UsersAdapter :
     ListAdapter<User, UsersAdapter.UsersViewHolder>(DiffCallback()) {
 
     var onItemClick: ((User) -> Unit)? = null

@@ -1,6 +1,5 @@
 package com.artemiymatchin.testrentateamapp.api
 
-import com.artemiymatchin.testrentateamapp.data.User
 import retrofit2.http.GET
 import retrofit2.http.Query
 import io.reactivex.Observable
