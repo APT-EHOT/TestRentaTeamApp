@@ -2,12 +2,8 @@
     <string name="app_name">TestRentaTeamApp</string>
     <string name="title_home">List of users</string>
     <string name="title_dashboard">User Info</string>
-    <string name="title_notifications">Notifications</string>
-
-<!--  Home Fragment  -->
-    <string name="g">Notifications</string>
-    <string name="network_error">Network error! Tap "Offline mode" to load data from local cache</string>
-    <string name="no_data">No data in local cache</string>
-    <string name="offline_mode">Offline mode</string>
+    <string name="title_about">About</string>
+    <string name="no_data">Network error! Please, restart application</string>
+    <string name="about_text">Тестовое задание для Rentateam</string>
 
 </resources>
