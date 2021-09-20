@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">TestRentaTeamApp</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">List of users</string>
+    <string name="title_dashboard">User Info</string>
+    <string name="title_about">About</string>
+    <string name="no_data">Network error! Please, restart application</string>
+    <string name="about_text">Тестовое задание для Rentateam</string>
+
 </resources>
