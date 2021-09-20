@@ -6,6 +6,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.artemiymatchin.testrentateamapp.R
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.artemiymatchin.testrentateamapp.data.FragmentDataState
 import com.artemiymatchin.testrentateamapp.databinding.FragmentHomeBinding
@@ -14,7 +15,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home),
+    UsersAdapter.OnItemClickListener {
 
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
@@ -27,6 +29,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         dataState = FragmentDataState.LOADING
 
         val usersAdapter = UsersAdapter()
+        usersAdapter.onItemClick = {
+            val action = HomeFragmentDirections.actionHomeToUserInfo(it.id)
+            findNavController().navigate(action)
+        }
 
         updateUI()
 
@@ -74,5 +80,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
         }
+    }
+
+    override fun onItemClick(id: Int) {
+
     }
 }

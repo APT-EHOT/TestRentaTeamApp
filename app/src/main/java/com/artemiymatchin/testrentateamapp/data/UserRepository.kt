@@ -1,5 +1,6 @@
 package com.artemiymatchin.testrentateamapp.data
 
+import android.annotation.SuppressLint
 import com.artemiymatchin.testrentateamapp.api.RetrofitApi
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
@@ -16,6 +17,7 @@ class UserRepository @Inject constructor(
         tryToFetchUsers()
         return userDao.loadUsersFromDB()
     }
+
 
     private fun tryToFetchUsers() {
 
@@ -40,6 +42,22 @@ class UserRepository @Inject constructor(
                         }
                         .subscribe({}, { e -> e.printStackTrace() })
                 }
+            }
+            .subscribe({}, { e -> e.printStackTrace() })
+    }
+
+
+    fun getUserByID(id: Int): Observable<User> {
+        tryToFetchUserByID(id)
+        return userDao.loadUserFromDB(id)
+    }
+
+
+    private fun tryToFetchUserByID(id: Int) {
+        retrofitApi.getUserByIdFromRemote(id)
+            .subscribeOn(Schedulers.io())
+            .doOnNext {
+                userDao.insert(it)
             }
             .subscribe({}, { e -> e.printStackTrace() })
     }

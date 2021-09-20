@@ -16,5 +16,5 @@ interface UserDao {
     fun insert(user: User)
 
     @Query("SELECT * FROM user_table WHERE id = :id")
-    fun loadUserFromDB(id: Int)
+    fun loadUserFromDB(id: Int): Observable<User>
 }

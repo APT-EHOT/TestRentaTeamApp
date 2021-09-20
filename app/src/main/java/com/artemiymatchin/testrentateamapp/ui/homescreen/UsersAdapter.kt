@@ -1,17 +1,25 @@
 package com.artemiymatchin.testrentateamapp.ui.homescreen
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.artemiymatchin.testrentateamapp.data.User
 import com.artemiymatchin.testrentateamapp.databinding.UserShortCardBinding
 
-class UsersAdapter : ListAdapter<User, UsersAdapter.UsersViewHolder>(DiffCallback()) {
+
+class UsersAdapter() :
+    ListAdapter<User, UsersAdapter.UsersViewHolder>(DiffCallback()) {
+
+    var onItemClick: ((User) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersViewHolder {
-        val binding = UserShortCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            UserShortCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return UsersViewHolder(binding)
     }
 
@@ -20,14 +28,26 @@ class UsersAdapter : ListAdapter<User, UsersAdapter.UsersViewHolder>(DiffCallbac
         holder.bind(currentItem)
     }
 
-    class UsersViewHolder(private val binding: UserShortCardBinding) :
+    inner class UsersViewHolder(private val binding: UserShortCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                onItemClick?.invoke(getItem(adapterPosition))
+            }
+        }
+
         fun bind(user: User) {
             binding.apply {
                 firstNameField.text = user.first_name
                 lastNameField.text = user.last_name
             }
+
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(id: Int)
     }
 
     class DiffCallback : DiffUtil.ItemCallback<User>() {

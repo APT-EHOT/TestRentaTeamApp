@@ -9,13 +9,21 @@
         android:id="@+id/navigation_home"
         android:name="com.artemiymatchin.testrentateamapp.ui.homescreen.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_to_user_info"
+            app:destination="@id/navigation_user_info" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_user_info"
         android:name="com.artemiymatchin.testrentateamapp.ui.userscreen.UserScreenFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_user_screen" />
+        tools:layout="@layout/fragment_user_screen" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
